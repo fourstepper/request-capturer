@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-http-app-deployment
+  namespace: logging
+  labels:
+    app: go-http-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-http-app
+  template:
+    metadata:
+      labels:
+        app: go-http-app
+    spec:
+      containers:
+      - name: go-http-app
+        image: docker.io/fourstepper/request-capturer:second
+        ports:
+        - containerPort: 8080
